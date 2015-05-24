@@ -5,4 +5,17 @@
   <version>0.0.1</version>
   <name>Sokoban</name>
   <description>Sokoban game in Java</description>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.json</groupId>
+  		<artifactId>json</artifactId>
+  		<version>20141113</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.clerezza.ext</groupId>
+  		<artifactId>org.json.simple</artifactId>
+  		<version>0.4</version>
+  		<type>bundle</type>
+  	</dependency>
+  </dependencies>
 </project>

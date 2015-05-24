@@ -44,18 +44,7 @@ public class Game {
 	/**
 	 * Játék adatmodelje, egy pálya milyen elemeket tartalmazon.
 	 */
-	private Object o[][] = new Object[][] {
-			{null, null, null, null, null, null, null, null, null, null},
-			{null, "jatekos", "t", "t", null, null, null, null, null, null},
-			{null, null, "t", "k", "t", "t", null, null, null, null},
-			{null, null, "t", "t", "t", "t", null, null, null, null},
-			{null, null, null, null, "t", "t", "t", "t", null, null},
-			{null, null, null, null, "t", "t", "k", "t", "c", null},
-			{null, null, null, null, null, "t", "t", "t", "c", null},
-			{null, null, null, null, null, null, null, "t", "t", null},
-			{null, null, null, null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null, null, null, null},
-	};
+	private Object o[][];
 	
 	/**
 	 * Tábla fejléce
@@ -87,6 +76,14 @@ public class Game {
 		 * Konstruktor paraméter nélküli példányosításhoz.
 		 */
 		public Coordinate(){this.x = 0; this.y = 0;}
+	}
+	
+	/**
+	 * Konstruktor amely @see {@link JsonIO} példanyosítja
+	 */
+	public Game(){
+		JsonIO j = new JsonIO();
+		this.o = j.getMap(); 
 	}
 
 	/**

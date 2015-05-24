@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.border.BevelBorder;
+import javax.swing.JButton;
 
 /**
  * @author aximcore
@@ -201,5 +202,15 @@ public class GameGui {
 		winCount = new JLabel("0");
 		winCount.setBounds(485, 787, 70, 15);
 		panel.add(winCount);
+		
+		JButton btnRefresh = new JButton("Refresh");
+		btnRefresh.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				fullTableRender();
+			}
+		});
+		btnRefresh.setBounds(1024, 782, 117, 25);
+		panel.add(btnRefresh);
 	}
 }
