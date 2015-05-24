@@ -32,13 +32,35 @@ import java.util.List;
 
 import javax.swing.border.BevelBorder;
 
+/**
+ * @author aximcore
+ *
+ */
 public class GameGui {
-	
+	/**
+	 * Játék váza.
+	 */
 	private JFrame frmSokoban;
+	
+	/**
+	 * A játék játszható felületét adja.
+	 */
 	private JTable table;
+	
+	/**
+	 * A játék játszható felületének adatmodeljét adja.
+	 */
 	private DefaultTableModel dm;
+	
+	/**
+	 * A játék szabályait figyelő és események következményeit kezeli.
+	 */
 	private Game game = new Game();
 	
+	/**
+	 * A játék felület színezésért felelős függvény.
+	 * @return játék színezet oszloppával
+	 */
 	private TableCellRenderer getRenderer() {
 		return new DefaultTableCellRenderer(){
 			@Override
@@ -63,6 +85,9 @@ public class GameGui {
 		};
 	}
 
+	/**
+	 * Egér események kezelése, bal klikkre lépés.
+	 */
 	private MouseListener tableMouseListener = new MouseAdapter(){
 		@Override
 		public void mouseClicked(MouseEvent e){
@@ -75,6 +100,9 @@ public class GameGui {
 		}
 	};
 	
+	/**
+	 * A játék adatmodljének frissítése {@code Game} objektumból.
+	 */
 	@SuppressWarnings("serial")
 	private void refreshDM(){
 		table.setModel(new DefaultTableModel(game.getMap(),
@@ -91,7 +119,8 @@ public class GameGui {
 	}
 
 	/**
-	 * Launch the application.
+	 * Játék felület létrehozása.
+	 * @param args parancssori argumentumok
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -100,9 +129,7 @@ public class GameGui {
 					GameGui window = new GameGui();
 					window.frmSokoban.setVisible(true);
 					window.table.addMouseListener(window.tableMouseListener);
-					window.game.addStepData(1, 1);
-							
-					
+					window.game.addStepData(1, 1);				
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -110,25 +137,25 @@ public class GameGui {
 		});
 	}
 	
+	/**
+	 * Frissíti az adatmodelt utána végig megy az oszlopokon és meghívja @see getRenderer() -t.
+	 */
 	private void fullTableRender(){
 		this.refreshDM();
-		//table.repaint();
 		for(int i = 0; i < table.getColumnCount(); i++)
 			table.getColumnModel().getColumn(i).setCellRenderer(getRenderer());
 	}
 
 	/**
-	 * Create the application.
+	 * Játék felület initalizálásának meghívása.
 	 */
 	public GameGui() {
 		initialize();
-		game.addStepData(1, 1);
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Játék felület initalizálása.
 	 */
-	@SuppressWarnings("serial")
 	private void initialize() {
 		frmSokoban = new JFrame();
 		frmSokoban.setResizable(false);
@@ -145,8 +172,8 @@ public class GameGui {
 		table.setSelectionBackground(null);
 
 		table.setBounds(12, 12, 1129, 750);
-		this.refreshDM();
-
+		fullTableRender(); // Adatmodel betöltése és tábla színei beállítása
+		
 		table.setRowHeight(75);
 
 		table.getColumnModel().getColumn(0).setMinWidth(75);	
@@ -162,6 +189,5 @@ public class GameGui {
 
 		panel.setLayout(null);
 		panel.add(table);
-		fullTableRender();
 	}
 }
