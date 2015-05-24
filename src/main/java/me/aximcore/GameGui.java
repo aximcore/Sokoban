@@ -51,14 +51,9 @@ public class GameGui {
 	private JLabel stepCount;
 	
 	/**
-	 * A játék játszható felületének adatmodeljét adja.
-	 */
-	private DefaultTableModel dm;
-	
-	/**
 	 * A játék szabályait figyelő és események következményeit kezeli.
 	 */
-	private Game game = new Game();
+	private Game game;
 	
 	/**
 	 * A játék felület színezésért felelős függvény.
@@ -110,7 +105,7 @@ public class GameGui {
 	 */
 	@SuppressWarnings("serial")
 	private void refreshDM(){
-		table.setModel(new DefaultTableModel(game.getMap(), game.getHeader()){
+		table.setModel(new DefaultTableModel(this.game.getMap(), this.game.getHeader()){
 			@Override
 			public boolean isCellEditable(int i, int i1) {
 				return false;
@@ -147,9 +142,10 @@ public class GameGui {
 	}
 
 	/**
-	 * Játék felület initalizálásának meghívása.
+	 * Játék felület/menet initalizálásának meghívása.
 	 */
 	public GameGui() {
+		game = new Game();
 		initialize();
 	}
 
