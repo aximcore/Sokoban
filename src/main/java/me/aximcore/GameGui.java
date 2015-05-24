@@ -138,7 +138,7 @@ public class GameGui {
 	}
 	
 	/**
-	 * Frissíti az adatmodelt utána végig megy az oszlopokon és meghívja @see getRenderer() -t.
+	 * Frissíti az adatmodelt utána végig megy az oszlopokon és meghívja @see {@link #getRenderer()}-t.
 	 */
 	private void fullTableRender(){
 		this.refreshDM();
