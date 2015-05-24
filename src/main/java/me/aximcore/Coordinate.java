@@ -5,12 +5,12 @@ package me.aximcore;
  */
 public class Coordinate {
 	/**
-	 * Sor index
+	 * Sor index.
 	 */
 	public int x;
 	
 	/**
-	 * Oszlop index
+	 * Oszlop index.
 	 */
 	public int y;
 

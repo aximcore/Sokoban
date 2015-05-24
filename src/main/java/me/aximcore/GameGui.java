@@ -38,13 +38,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * Játék felület swingben.
  * @author aximcore
  *
  */
 public class GameGui {
 	
 	/**
-	 * Logger beálítása 
+	 * Logger beálítása.
 	 */
 	private static Logger logger = LoggerFactory.getLogger(GameGui.class);
 
@@ -58,7 +59,14 @@ public class GameGui {
 	 */
 	private JTable table;
 	
+	/**
+	 * Label a helyére mozgatott kockák számának.
+	 */
 	private JLabel winCount;
+	
+	/**
+	 * Label a, hogy hány mozgás volt.
+	 */
 	private JLabel stepCount;
 	
 	/**
@@ -68,7 +76,7 @@ public class GameGui {
 	
 	/**
 	 * A játék felület színezésért felelős függvény.
-	 * @return játék színezet oszloppával
+	 * @return játék színezet oszloppával.
 	 */
 	private TableCellRenderer getRenderer() {
 		logger.trace("getRenderer");
@@ -131,7 +139,7 @@ public class GameGui {
 
 	/**
 	 * Játék felület létrehozása.
-	 * @param args parancssori argumentumok
+	 * @param args parancssori argumentumok.
 	 */
 	public static void main(String[] args) {
 		logger.info("Main");

@@ -10,13 +10,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * Játék logika.
  * @author aximcore
- *
  */
 public class Game {
 	
 	/**
-	 * Logger beálítása 
+	 * Logger beálítása.
 	 */
 	private static Logger logger = LoggerFactory.getLogger(Game.class);
 	/**
@@ -55,12 +55,12 @@ public class Game {
 	private Object o[][];
 	
 	/**
-	 * Tábla fejléce
+	 * Tábla fejléce.
 	 */
 	private String[] header;
 
 	/**
-	 * Konstruktor amely @see {@link JsonIO} példanyosítja
+	 * Konstruktor amely @see {@link JsonIO} példanyosítja.
 	 */
 	public Game(){
 		JsonIO j = new JsonIO();
@@ -72,8 +72,8 @@ public class Game {
 
 	/**
 	 * Klikkelt pozíció beállítása.
-	 * @param x sor index
-	 * @param y oszlop index
+	 * @param x sor index.
+	 * @param y oszlop index.
 	 */
 	public void setClickedPos(int x, int y){
 		logger.trace("ClickedPos set");
@@ -82,9 +82,9 @@ public class Game {
 	}
 	
 	/**
-	 * Új lépés hozzáadása @see stepData -hoz.
-	 * @param x
-	 * @param y
+	 * Új lépés hozzáadása {@link #stepData} -hoz.
+	 * @param x sor.
+	 * @param y oszlop.
 	 */
 	public void addStepData(int x, int y){
 		logger.trace("add StepData");
@@ -119,7 +119,7 @@ public class Game {
 	}
 	
 	/**
-	 * Alap mátrix beálítása
+	 * Alap mátrix beálítása.
 	 * @param o egy Object mátrix
 	 */
 	public void setObject(Object [][] o){
@@ -133,13 +133,13 @@ public class Game {
 	public Object[][] getMap(){ return o; }
 	
 	/**
-	 * Tábla fejlécével tér vissza
+	 * Tábla fejlécével tér vissza.
 	 * @return String tömb
 	 */
 	public String[] getHeader(){ return header; }
 	
 	/**
-	 * Játékos pozíciójának megkeresése
+	 * Játékos pozíciójának megkeresése.
 	 * @return @see {@link Coordinate}
 	 */
 	public Coordinate getGamerPos(){
@@ -216,8 +216,9 @@ public class Game {
 	}
 	
 	/**
-	 * @see {@link #o} mátrixban lévő adatok átírása @see {@link #step()} megfelelően.
-	 * @see {@link #stepData} újlépés rögzítése 
+	 * {@link me.aximcore.Game#o Matrixban} lévő adatok átírása {@link me.aximcore.Game#step() Step} megfelelően.
+	 * {@link #stepData} újlépés rögzítése.
+	 * @param c tábla értéke.
 	 */
 	public void setTableValue(String c){
 		if (c == null){

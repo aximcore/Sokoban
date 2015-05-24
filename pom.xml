@@ -6,6 +6,11 @@
 	<version>0.0.1</version>
 	<name>Sokoban</name>
 	<description>Sokoban game in Java</description>
+	<organization>
+		<name>Unideb</name>
+		<url>http://w1.inf.unideb.hu</url>
+	</organization>
+	<inceptionYear>2015</inceptionYear>
 	<developers>
 		<developer>
 			<name>Tóth Máté</name>
@@ -38,6 +43,29 @@
 	</dependencies>
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.5.4</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<phase>package</phase>
+						<configuration>
+							<archive>
+								<manifest>
+									<mainClass>me.aximcore.GameGui</mainClass>
+								</manifest>
+							</archive>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -181,6 +209,9 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>2.15</version>
+				<configuration>
+					<configLocation>checkstyle.xml</configLocation>
+				</configuration>
 				<reportSets>
 					<reportSet>
 						<reports>
