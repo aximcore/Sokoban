@@ -1,34 +1,33 @@
 package sokoban;
 
 import static org.junit.Assert.*;
-import me.aximcore.Coordinate;
 import me.aximcore.Game;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class GameTest {
 	
+	Game g;
+	
+	@Before
+	public void initTestGame(){
+		g = new Game();
+	}
+	
 	@Test
-	public void getMapTest() {
-		Game g = new Game();
-		
+	public void getMapTest() {	
 		assertNotNull(g.getMap());
 	}
 	
 	@Test(expected=NullPointerException.class)
-	public void getGamerPosTest(){
-		Game g = new Game();
-		
+	public void getGamerPosTest(){	
 		g.setObject(new Object[][] {null});
 		g.getGamerPos(); // túl indexel
 	}
 	
 	@Test
 	public void getGamerPosTest1(){
-		Game g = new Game();
-		
 		g.setObject(new Object[][] {
 				{null, null, null, null, null, null, null, null, null, null},
 				{null, "jatekos", "t", "t", null, null, null, null, null, null},
@@ -47,9 +46,7 @@ public class GameTest {
 	}
 	
 	@Test
-	public void getGamerPosTest2(){
-		Game g = new Game();
-		
+	public void getGamerPosTest2(){	
 		g.setObject(new Object[][] {
 				{null, null, null, null, null, null, null, null, null, null},
 				{null, "t", "t", "t", null, null, null, null, null, null},
@@ -69,8 +66,6 @@ public class GameTest {
 	
 	@Test
 	public void stepTest(){
-		Game g = new Game();
-		
 		g.setClickedPos(1, 2); // t helyre
 		g.setClickedValue("t");
 		g.step();	// játékos átkerül 1 sor 2 oszlopba
@@ -83,8 +78,6 @@ public class GameTest {
 	
 	@Test
 	public void stepTest1(){
-		Game g = new Game();
-		
 		g.setClickedPos(1, 3); // t helyre
 		g.setClickedValue("t");
 		g.step();	// játékos nem lép mert nem egyet lépne
@@ -96,8 +89,6 @@ public class GameTest {
 	
 	@Test(expected=NullPointerException.class)
 	public void setTableValueTest(){
-		Game g = new Game();
-		
 		g.setTableValue("t"); // step-ben lesz foglalva actPos-nak memória
 	}
 

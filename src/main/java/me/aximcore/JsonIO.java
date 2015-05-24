@@ -9,13 +9,23 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class JsonIO {
-	List<String> mapRows = new ArrayList<>();
-	private void read(){
+	private List<String> mapRows = new ArrayList<>();
+	private String jsonPath;
+	
+	public int getMapRowsSize(){
+		return mapRows.size();
+	}
+	
+	public void setJsonPath(String path){
+		this.jsonPath = path;
+	}
+	
+	public void read(){
 		try{
 			JSONParser parser = new JSONParser();
 			ClassLoader classLoader = getClass().getClassLoader();
             Object obj = parser.parse(new FileReader(
-                    classLoader.getResource("map.json").getFile()));
+                    classLoader.getResource(jsonPath).getFile()));
  
             JSONObject jsonObject = (JSONObject) obj;
             Iterator<?> it = jsonObject.keySet().iterator();
@@ -65,6 +75,7 @@ public class JsonIO {
 	}
 	
 	public JsonIO(){
+		this.setJsonPath("map.json");
 		this.read();
 	}
 }
