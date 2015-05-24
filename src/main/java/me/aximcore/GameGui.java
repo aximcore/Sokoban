@@ -27,17 +27,27 @@ import javax.swing.BoxLayout;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.JButton;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @author aximcore
  *
  */
 public class GameGui {
+	
+	/**
+	 * Logger beálítása 
+	 */
+	private static Logger logger = LoggerFactory.getLogger(GameGui.class);
+
 	/**
 	 * Játék váza.
 	 */
@@ -61,6 +71,7 @@ public class GameGui {
 	 * @return játék színezet oszloppával
 	 */
 	private TableCellRenderer getRenderer() {
+		logger.trace("getRenderer");
 		return new DefaultTableCellRenderer(){
 			@Override
 			public Component getTableCellRendererComponent(JTable table,
@@ -77,7 +88,6 @@ public class GameGui {
 					tableCellRendererComponent.setBackground(Color.RED);
 				} else if(value == null){
 					tableCellRendererComponent.setBackground(Color.BLUE);
-					//tableCellRendererComponent.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());
 				}
 				return tableCellRendererComponent;
 			}
@@ -91,6 +101,7 @@ public class GameGui {
 		@Override
 		public void mouseClicked(MouseEvent e){
 			if(e.getButton() == MouseEvent.BUTTON1){
+				logger.trace("Mouse Button1 pushed");
 				game.setClickedPos(table.rowAtPoint(e.getPoint()),table.columnAtPoint(e.getPoint()));
 				game.setClickedValue(table.getValueAt(table.rowAtPoint(e.getPoint()),table.columnAtPoint(e.getPoint())));
 				game.step();
@@ -106,6 +117,7 @@ public class GameGui {
 	 */
 	@SuppressWarnings("serial")
 	private void refreshDM(){
+		logger.trace("refreshDM");
 		table.setModel(new DefaultTableModel(this.game.getMap(), this.game.getHeader()){
 			@Override
 			public boolean isCellEditable(int i, int i1) {
@@ -119,6 +131,7 @@ public class GameGui {
 	 * @param args parancssori argumentumok
 	 */
 	public static void main(String[] args) {
+		logger.info("Main");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -201,6 +214,6 @@ public class GameGui {
 		winCount = new JLabel("0");
 		winCount.setBounds(485, 787, 70, 15);
 		panel.add(winCount);
-		
+		logger.info("Gui init vége");
 	}
 }

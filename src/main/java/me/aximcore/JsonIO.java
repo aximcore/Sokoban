@@ -7,10 +7,14 @@ import java.util.List;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JsonIO {
 	private List<String> mapRows = new ArrayList<>();
 	private String jsonPath;
+	private static Logger logger = LoggerFactory.getLogger(JsonIO.class);
+
 	
 	public int getMapRowsSize(){
 		return mapRows.size();
@@ -21,9 +25,11 @@ public class JsonIO {
 	}
 	
 	public void read(){
+		logger.trace("Json read");
 		try{
 			JSONParser parser = new JSONParser();
 			ClassLoader classLoader = getClass().getClassLoader();
+			logger.trace("Json parser");
             Object obj = parser.parse(new FileReader(
                     classLoader.getResource(jsonPath).getFile()));
  
@@ -31,8 +37,11 @@ public class JsonIO {
             Iterator<?> it = jsonObject.keySet().iterator();
             
             while(it.hasNext()){
-            	mapRows.add(jsonObject.get(it.next().toString()).toString());
+            	String key = it.next().toString();
+            	logger.debug("Iterat this key {}", key);
+            	mapRows.add(jsonObject.get(key).toString());
             }
+            logger.debug("mapRows size {}", mapRows.size());
             
 		} catch (Exception e){
 			System.out.println(e.toString());
@@ -61,6 +70,8 @@ public class JsonIO {
 					o[i][ii] = "c";
 					ii++;
 				}
+				
+				logger.debug("Matrix [i][ii] value {}", o[i][ii]);
 			}
 			i++;
 		}
