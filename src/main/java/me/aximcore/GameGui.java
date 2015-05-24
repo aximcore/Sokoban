@@ -47,6 +47,9 @@ public class GameGui {
 	 */
 	private JTable table;
 	
+	private JLabel winCount;
+	private JLabel stepCount;
+	
 	/**
 	 * A játék játszható felületének adatmodeljét adja.
 	 */
@@ -95,6 +98,8 @@ public class GameGui {
 				game.setClickedPos(table.rowAtPoint(e.getPoint()),table.columnAtPoint(e.getPoint()));
 				game.setClickedValue(table.getValueAt(table.rowAtPoint(e.getPoint()),table.columnAtPoint(e.getPoint())));
 				game.step();
+				stepCount.setText(game.getStepCount());
+				winCount.setText(game.getWinCount());
 				fullTableRender();
 			}
 		}
@@ -105,12 +110,7 @@ public class GameGui {
 	 */
 	@SuppressWarnings("serial")
 	private void refreshDM(){
-		table.setModel(new DefaultTableModel(game.getMap(),
-				new String[] {
-			"", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column"
-		}
-				)
-		{
+		table.setModel(new DefaultTableModel(game.getMap(), game.getHeader()){
 			@Override
 			public boolean isCellEditable(int i, int i1) {
 				return false;
@@ -189,5 +189,21 @@ public class GameGui {
 
 		panel.setLayout(null);
 		panel.add(table);
+		
+		JLabel lblLepesekSzama = new JLabel("Lépések Száma:");
+		lblLepesekSzama.setBounds(12, 787, 126, 15);
+		panel.add(lblLepesekSzama);
+		
+		stepCount = new JLabel("0");
+		stepCount.setBounds(141, 787, 70, 15);
+		panel.add(stepCount);
+		
+		JLabel lblHelyreMozgatottElemek = new JLabel("Helyére mozgatott elemek száma:");
+		lblHelyreMozgatottElemek.setBounds(223, 787, 250, 15);
+		panel.add(lblHelyreMozgatottElemek);
+		
+		winCount = new JLabel("0");
+		winCount.setBounds(485, 787, 70, 15);
+		panel.add(winCount);
 	}
 }

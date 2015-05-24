@@ -37,9 +37,9 @@ public class Game {
 	private List<Coordinate> stepData = new ArrayList<>();
 	
 	/**
-	 * Lépések száma.
+	 * Helyére tolt kockák száma.
 	 */
-	private int stepCount;
+	private Integer winCount = 0;
 	
 	/**
 	 * Játék adatmodelje, egy pálya milyen elemeket tartalmazon.
@@ -50,12 +50,17 @@ public class Game {
 			{null, null, "t", "k", "t", "t", null, null, null, null},
 			{null, null, "t", "t", "t", "t", null, null, null, null},
 			{null, null, null, null, "t", "t", "t", "t", null, null},
-			{null, null, null, null, "t", "t", "t", "t", "t", null},
+			{null, null, null, null, "t", "t", "k", "t", "c", null},
 			{null, null, null, null, null, "t", "t", "t", "c", null},
 			{null, null, null, null, null, null, null, "t", "t", null},
 			{null, null, null, null, null, null, null, null, null, null},
 			{null, null, null, null, null, null, null, null, null, null},
 	};
+	
+	/**
+	 * Tábla fejléce
+	 */
+	private String[] header = new String[] {"", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column"};
 
 	/**
 	 * Pozíciók tárolásához használt adatstruktúra.
@@ -111,10 +116,32 @@ public class Game {
 	}
 	
 	/**
+	 * Lépések számával tér vissza.
+	 * @return String típussal
+	 */
+	public String getStepCount(){
+		return new Integer(stepData.size() - 1).toString();
+	}
+	
+	/**
+	 * Hány kocka van már a helyén.
+	 * @return String
+	 */
+	public String getWinCount(){
+		return winCount.toString();
+	}
+	
+	/**
 	 * Visszatér az alap objektum mátrixxal tábla számára.
 	 * @return @see {@link #o}
 	 */
 	public Object[][] getMap(){ return o; }
+	
+	/**
+	 * Tábla fejlécével tér vissza
+	 * @return String tömb
+	 */
+	public String[] getHeader(){ return header; }
 	
 	/**
 	 * Lépéssek lekezelése.
@@ -126,7 +153,6 @@ public class Game {
 				Math.abs(clickedPos.x - actPos.x) == 0 && Math.abs(clickedPos.y - actPos.y) == 1) { // csak ha egyel mozgunk el
 
 			if("t".equals(clickedPosValue)){ // csak ha sima területre lépünk
-				System.out.println("t-ba belépve");
 				setTableValue(null);
 			} else if ( "k".equals(clickedPosValue)){
 				pushedPos = new Coordinate();
@@ -149,11 +175,12 @@ public class Game {
 				if("t".equals(o[pushedPos.x][pushedPos.y])){ // a kocka amerre mozog ott szabad e
 					setTableValue("k");
 				} else if ("c".equals(o[pushedPos.x][pushedPos.y])){
+					winCount++;
 					setTableValue("c");
 				}
 			}
 		}
-			
+		
 	}
 	
 	/**
