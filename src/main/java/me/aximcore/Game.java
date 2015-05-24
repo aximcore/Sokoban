@@ -105,7 +105,15 @@ public class Game {
 	}
 	
 	/**
-	 * Visszatér az alap objektum mátrixxal tábla számára.
+	 * Alap mátrix beálítása
+	 * @param o egy Object mátrix
+	 */
+	public void setObject(Object [][] o){
+		this.o = o;
+	}
+	
+	/**
+	 * Visszatér az alap objektum mátrix-szal tábla számára.
 	 * @return @see {@link #o}
 	 */
 	public Object[][] getMap(){ return o; }
@@ -120,7 +128,7 @@ public class Game {
 	 * Játékos pozíciójának megkeresése
 	 * @return @see {@link Coordinate}
 	 */
-	private Coordinate getGamerPos(){
+	public Coordinate getGamerPos(){
 		int x = 0, y = 0;
 		for(int i = 0; i < o.length; i++){
 			for(int ii = 0; ii < o[i].length; ii++){
@@ -171,7 +179,6 @@ public class Game {
 				}
 			}
 		}
-		
 	}
 	
 	/**
