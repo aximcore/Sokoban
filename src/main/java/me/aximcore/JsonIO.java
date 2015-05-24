@@ -26,10 +26,13 @@ public class JsonIO {
 	
 	public void read(){
 		logger.trace("Json read");
+		
 		try{
 			JSONParser parser = new JSONParser();
 			ClassLoader classLoader = getClass().getClassLoader();
+			
 			logger.trace("Json parser");
+			
             Object obj = parser.parse(new FileReader(
                     classLoader.getResource(jsonPath).getFile()));
  
@@ -38,7 +41,9 @@ public class JsonIO {
             
             while(it.hasNext()){
             	String key = it.next().toString();
+            	
             	logger.debug("Iterat this key {}", key);
+            	
             	mapRows.add(jsonObject.get(key).toString());
             }
             logger.debug("mapRows size {}", mapRows.size());

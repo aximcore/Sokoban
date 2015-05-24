@@ -72,6 +72,7 @@ public class GameGui {
 	 */
 	private TableCellRenderer getRenderer() {
 		logger.trace("getRenderer");
+		
 		return new DefaultTableCellRenderer(){
 			@Override
 			public Component getTableCellRendererComponent(JTable table,
@@ -102,6 +103,7 @@ public class GameGui {
 		public void mouseClicked(MouseEvent e){
 			if(e.getButton() == MouseEvent.BUTTON1){
 				logger.trace("Mouse Button1 pushed");
+				
 				game.setClickedPos(table.rowAtPoint(e.getPoint()),table.columnAtPoint(e.getPoint()));
 				game.setClickedValue(table.getValueAt(table.rowAtPoint(e.getPoint()),table.columnAtPoint(e.getPoint())));
 				game.step();
@@ -118,6 +120,7 @@ public class GameGui {
 	@SuppressWarnings("serial")
 	private void refreshDM(){
 		logger.trace("refreshDM");
+		
 		table.setModel(new DefaultTableModel(this.game.getMap(), this.game.getHeader()){
 			@Override
 			public boolean isCellEditable(int i, int i1) {
@@ -132,6 +135,7 @@ public class GameGui {
 	 */
 	public static void main(String[] args) {
 		logger.info("Main");
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -214,6 +218,7 @@ public class GameGui {
 		winCount = new JLabel("0");
 		winCount.setBounds(485, 787, 70, 15);
 		panel.add(winCount);
+		
 		logger.info("Gui init vége");
 	}
 }

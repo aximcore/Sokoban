@@ -77,6 +77,7 @@ public class Game {
 	 */
 	public void setClickedPos(int x, int y){
 		logger.trace("ClickedPos set");
+		
 		this.clickedPos = new Coordinate(x,y);
 	}
 	
@@ -87,6 +88,7 @@ public class Game {
 	 */
 	public void addStepData(int x, int y){
 		logger.trace("add StepData");
+		
 		stepData.add(new Coordinate(x,y));
 	}
 	
@@ -96,6 +98,7 @@ public class Game {
 	 */
 	public void setClickedValue(Object o){
 		logger.trace("ClickedValue set");
+		
 		clickedPosValue = o;
 	}
 	
@@ -140,7 +143,9 @@ public class Game {
 	 * @return @see {@link Coordinate}
 	 */
 	public Coordinate getGamerPos(){
+		
 		logger.trace("getGamerPos");
+		
 		int x = 0, y = 0;
 		for(int i = 0; i < o.length; i++){
 			for(int ii = 0; ii < o[i].length; ii++){
@@ -150,7 +155,9 @@ public class Game {
 				}
 			}
 		}
+		
 		logger.debug("Gamer pos x - y : {} - {}", x,y);
+		
 		return new Coordinate(x,y);
 	}
 	
@@ -159,6 +166,7 @@ public class Game {
 	 */
 	public void step(){
 		logger.trace("Step begin");
+		
 		actPos = new Coordinate(stepData.get(stepData.size()-1).x, stepData.get(stepData.size()-1).y);
 		
 		if(Math.abs(clickedPos.x - actPos.x) == 1 && Math.abs(clickedPos.y - actPos.y) == 0 ||
@@ -166,9 +174,12 @@ public class Game {
 
 			if("t".equals(clickedPosValue)){ // csak ha sima területre lépünk
 				logger.trace("if t == clickedPosValue");
+				
 				setTableValue(null);
 			} else if ( "k".equals(clickedPosValue)){
+				
 				logger.trace("if k == clickedPosValue");
+				
 				pushedPos = new Coordinate();
 				if(clickedPos.x > actPos.x) { // ha x nőt akkor
 					pushedPos.x = clickedPos.x + 1;
@@ -194,7 +205,9 @@ public class Game {
 					setTableValue("k");
 				} else if ("c".equals(o[pushedPos.x][pushedPos.y])){
 					winCount++;
+					
 					logger.debug("winCount: {}", winCount);
+					
 					setTableValue("c");
 				}
 			}
@@ -214,7 +227,7 @@ public class Game {
 			logger.debug("o -> actPos value: {} o -> clickedPos value: {}", 
 					o[actPos.x][actPos.y],o[clickedPos.x][clickedPos.y] );
 		} else {
-			logger.trace("setTableValue else ág");
+			logger.trace("setTableValue else");
 			o[actPos.x][actPos.y] = "t";
 			o[clickedPos.x][clickedPos.y] = "jatekos";
 			o[pushedPos.x][pushedPos.y] = c; // ahol t volt oda megy a kocka/cél
