@@ -34,7 +34,7 @@ public class Game {
 	/**
 	 * @see List típusú tömben tároljuk az lépésekket. 
 	 */
-	private List<Coordinate> stepData = new ArrayList<>();
+	private List<Coordinate> stepData;
 	
 	/**
 	 * Helyére tolt kockák száma.
@@ -49,41 +49,17 @@ public class Game {
 	/**
 	 * Tábla fejléce
 	 */
-	private String[] header = new String[] {"", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column"};
+	private String[] header;
 
-	/**
-	 * Pozíciók tárolásához használt adatstruktúra.
-	 */
-	class Coordinate {
-		/**
-		 * Sor index
-		 */
-		public int x;
-		
-		/**
-		 * Oszlop index
-		 */
-		public int y;
-
-		/**
-		 * Konstruktor két paraméteres példányosításhoz.
-		 * @param x sor index
-		 * @param y oszlop index
-		 */
-		public Coordinate(int x, int y){this.x = x; this.y = y;}
-		
-		/**
-		 * Konstruktor paraméter nélküli példányosításhoz.
-		 */
-		public Coordinate(){this.x = 0; this.y = 0;}
-	}
-	
 	/**
 	 * Konstruktor amely @see {@link JsonIO} példanyosítja
 	 */
 	public Game(){
 		JsonIO j = new JsonIO();
-		this.o = j.getMap(); 
+		this.o = j.getMap();
+		this.header = j.getHeader();
+		this.stepData = new ArrayList<>();
+		this.stepData.add(getGamerPos());
 	}
 
 	/**
@@ -139,6 +115,24 @@ public class Game {
 	 * @return String tömb
 	 */
 	public String[] getHeader(){ return header; }
+	
+	/**
+	 * Játékos pozíciójának megkeresése
+	 * @return @see {@link Coordinate}
+	 */
+	private Coordinate getGamerPos(){
+		int x = 0, y = 0;
+		for(int i = 0; i < o.length; i++){
+			for(int ii = 0; ii < o[i].length; ii++){
+				if("jatekos".equals(o[i][ii])){
+					x = i;
+					y = ii;
+				}
+			}
+		}
+		
+		return new Coordinate(x,y);
+	}
 	
 	/**
 	 * Lépéssek lekezelése.

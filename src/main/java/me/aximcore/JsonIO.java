@@ -2,6 +2,7 @@ package me.aximcore;
 
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.json.simple.JSONObject;
@@ -17,17 +18,19 @@ public class JsonIO {
                     classLoader.getResource("map.json").getFile()));
  
             JSONObject jsonObject = (JSONObject) obj;
-	
-			for(int i = 0; i < 10; i++){
-				mapRows.add(jsonObject.get(String.valueOf(i)).toString());
-			}
+            Iterator<?> it = jsonObject.keySet().iterator();
+            
+            while(it.hasNext()){
+            	mapRows.add(jsonObject.get(it.next().toString()).toString());
+            }
+            
 		} catch (Exception e){
 			System.out.println(e.toString());
 		}
 	}
 	
 	public Object[][] getMap(){
-		Object[][] o = new Object[10][10];
+		Object[][] o = new Object[mapRows.size()][mapRows.size()];
 		int i = 0, ii = 0;
 		for(String row : mapRows){
 			ii = 0;
@@ -53,6 +56,12 @@ public class JsonIO {
 		}
 		
 		return o;
+	}
+	
+	public String[] getHeader(){
+		String [] header = new String[mapRows.size()];
+		
+		return header;
 	}
 	
 	public JsonIO(){

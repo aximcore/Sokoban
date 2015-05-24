@@ -1,6 +1,4 @@
-{
-"id": 1,
-"0" : [null, null, null, null, null, null, null, null, null, null],
+{"0" : [null, null, null, null, null, null, null, null, null, null],
 "1" : [null, "jatekos", "t", "t", null, null, null, null, null, null],
 "2" : [null, null, "t", "k", "t", "t", null, null, null, null],
 "3" : [null, null, "t", "t", "t", "t", null, null, null, null],
@@ -9,5 +7,5 @@
 "6" : [null, null, null, null, null, "t", "t", "t", "c", null],
 "7" : [null, null, null, null, null, null, null, "t", "t", null],
 "8" : [null, null, null, null, null, null, null, null, null, null],
-"9" : [null, null, null, null, null, null, null, null, null, null]
-}
+"9" : [null, null, null, null, null, null, null, null, null, null],
+"10" : [null, null, null, null, null, null, null, null, null, null]}

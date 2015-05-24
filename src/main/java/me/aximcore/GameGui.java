@@ -124,8 +124,7 @@ public class GameGui {
 				try {
 					GameGui window = new GameGui();
 					window.frmSokoban.setVisible(true);
-					window.table.addMouseListener(window.tableMouseListener);
-					window.game.addStepData(1, 1);				
+					window.table.addMouseListener(window.tableMouseListener);				
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -203,14 +202,5 @@ public class GameGui {
 		winCount.setBounds(485, 787, 70, 15);
 		panel.add(winCount);
 		
-		JButton btnRefresh = new JButton("Refresh");
-		btnRefresh.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				fullTableRender();
-			}
-		});
-		btnRefresh.setBounds(1024, 782, 117, 25);
-		panel.add(btnRefresh);
 	}
 }
