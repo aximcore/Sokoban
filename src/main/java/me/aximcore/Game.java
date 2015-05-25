@@ -128,7 +128,7 @@ public class Game {
 	
 	/**
 	 * Visszatér az alap objektum mátrix-szal tábla számára.
-	 * @return @see {@link #o}
+	 * @return {@link #o}
 	 */
 	public Object[][] getMap(){ return o; }
 	
@@ -140,7 +140,7 @@ public class Game {
 	
 	/**
 	 * Játékos pozíciójának megkeresése.
-	 * @return @see {@link Coordinate}
+	 * @return {@link Coordinate}
 	 */
 	public Coordinate getGamerPos(){
 		
