@@ -18,6 +18,12 @@
 			<url>http://aximcore.me</url>
 		</developer>
 	</developers>
+	
+	<scm>
+		<connection>scm:git:git://github.com/aximcore/sokoban.git</connection>
+		<url>https://github.com/aximcore/sokoban</url>
+	</scm>
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.outputEncoding>UTF-8</project.build.outputEncoding>
