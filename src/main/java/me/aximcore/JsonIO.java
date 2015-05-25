@@ -1,8 +1,11 @@
 package me.aximcore;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -10,6 +13,7 @@ import java.util.List;
 import java.util.logging.LogManager;
 
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,17 +53,19 @@ public class JsonIO {
 		logger.trace("Json read");
 		
 		try{
+			InputStream inputStream = this.getClass().getResourceAsStream("/map.json");
+			DataInputStream in = new DataInputStream(inputStream);
+			String dataIn = new String();
+			String a = new String();
+			while((a = in.readLine()) != null){
+				dataIn += a;
+			}
+			
 			JSONParser parser = new JSONParser();
-			ClassLoader classLoader = getClass().getClassLoader();
-			
+			JSONObject jsonObject = (JSONObject) parser.parse(dataIn.toString());
+					
 			logger.trace("Json parser");
-			InputStream	in = classLoader.getResourceAsStream("map.json");
-			//URL url = JsonIO.class.getResource("/map.json");
-			
-			//InputStream input = getClass().getResourceAsStream("/map.json");
-            Object obj = parser.parse(in.toString());
- 
-            JSONObject jsonObject = (JSONObject) obj;
+
             Iterator<?> it = jsonObject.keySet().iterator();
             
             while(it.hasNext()){

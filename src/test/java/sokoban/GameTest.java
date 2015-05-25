@@ -9,7 +9,7 @@ import org.junit.Test;
 public class GameTest {
 	
 	Game g;
-	
+
 	@Before
 	public void initTestGame(){
 		g = new Game();
