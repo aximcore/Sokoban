@@ -81,15 +81,76 @@ public class GameTest {
 		g.setClickedPos(1, 3); // t helyre
 		g.setClickedValue("t");
 		g.step();	// játékos nem lép mert nem egyet lépne
-		
+
 		assertEquals("Játékos marad x = 1-ben", 1, g.getGamerPos().x);
 		assertEquals("Játékos marad y = 1-ben", 1, g.getGamerPos().y);
 		assertEquals("Nem lepet egyet sem", 0, Integer.valueOf(g.getStepCount()).intValue());
 	}
 	
+	@Test
+	public void stepTest2(){
+		g.setClickedPos(2,1); // null helyre
+		g.setClickedValue(null);
+		g.step();	// játékos nem lép mert nem t-re lép
+
+		assertEquals("Játékos marad x = 1-ben", 1, g.getGamerPos().x);
+		assertEquals("Játékos marad y = 1-ben", 1, g.getGamerPos().y);
+		assertEquals("Nem lepet egyet sem", 0, Integer.valueOf(g.getStepCount()).intValue());
+	}
+	
+	@Test
+	public void stepTest3(){
+		g.setClickedPos(2,3); // k helyre
+		g.setClickedValue("k");
+		g.step();	// játékos nem lép mert távol van
+
+		assertEquals("Játékos marad x = 1-ben", 1, g.getGamerPos().x);
+		assertEquals("Játékos marad y = 1-ben", 1, g.getGamerPos().y);
+		assertEquals("Nem lepet egyet sem", 0, Integer.valueOf(g.getStepCount()).intValue());
+	}
+	
+	@Test
+	public void stepTest4(){
+		g.setClickedPos(1,2); // k helyre
+		g.setClickedValue("k");
+		g.step();	// játékos lép k-helyére
+
+		assertEquals("Játékos x = 1-ben", 1, g.getGamerPos().x);
+		assertEquals("Játékos y = 2-ben", 2, g.getGamerPos().y);
+		assertEquals("Egyet lépet", 1, Integer.valueOf(g.getStepCount()).intValue());
+	}
+	
+	@Test
+	public void stepTest5(){
+		g.setClickedPos(2,1); // k helyre
+		g.setClickedValue("k");
+		g.step();	// játékos nem lép k-helyére
+
+		assertEquals("Játékos marad a x = 1-ben", 1, g.getGamerPos().x);
+		assertEquals("Játékos marad a y = 1-ben", 1, g.getGamerPos().y);
+		assertEquals("Nem lépet", 0, Integer.valueOf(g.getStepCount()).intValue());
+	}
+	
 	@Test(expected=NullPointerException.class)
 	public void setTableValueTest(){
 		g.setTableValue("t"); // step-ben lesz foglalva actPos-nak memória
+	}
+	
+	@Test
+	public void addStepDataTest(){
+		int size = Integer.parseInt(g.getStepCount());
+		g.addStepData(0, 0);
+		assertEquals("Méret eggyel nő", size + 1, Integer.parseInt(g.getStepCount()));
+	}
+	
+	@Test
+	public void getWinCountTest(){
+		assertEquals("Elején nincs helyén még kocka","0",g.getWinCount());
+	}
+	
+	@Test
+	public void getHeaderTest(){
+		assertNotNull(g.getHeader());
 	}
 
 }

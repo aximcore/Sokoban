@@ -1,19 +1,14 @@
 package me.aximcore;
 
-import java.io.BufferedReader;
 import java.io.DataInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.LogManager;
 
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,11 +19,23 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class JsonIO {
+	/**
+	 * Játék map sorai.
+	 */
 	private List<String> mapRows = new ArrayList<>();
+	
+	/**
+	 * Json fájl elérhetősége, .jar állományban.
+	 */
 	private String jsonPath;
 	
-	static {
-		InputStream	in = JsonIO.class.getResourceAsStream("/logging.properties");
+	//private static InputStream	in = JsonIO.class.getResourceAsStream("/logging.properties");
+	/**
+	 * Logger beállítása az osztályra.
+	 */
+	private static Logger logger = LoggerFactory.getLogger(JsonIO.class);
+
+	/*private static void setLogger(){
 		if (in != null) {
 			try {
 				LogManager.getLogManager().readConfiguration(in);
@@ -36,24 +43,32 @@ public class JsonIO {
 				e.printStackTrace();
 			}
 		}
-	}
+	}*/
 	
-	private static Logger logger = LoggerFactory.getLogger(JsonIO.class);
-
-	
+	/**
+	 * Hány sorom van.
+	 * @return sorok száma.
+	 */
 	public int getMapRowsSize(){
 		return mapRows.size();
 	}
 	
+	/**
+	 * Json fájl elérhetőségének beálítása.
+	 * @param path elérési út.
+	 */
 	public void setJsonPath(String path){
 		this.jsonPath = path;
 	}
 	
+	/**
+	 * Json fájl beolvasás resource-ből. 
+	 */
 	public void read(){
 		logger.trace("Json read");
 		
 		try{
-			InputStream inputStream = this.getClass().getResourceAsStream("/map.json");
+			InputStream inputStream = this.getClass().getResourceAsStream(jsonPath);
 			DataInputStream in = new DataInputStream(inputStream);
 			String dataIn = new String();
 			String a = new String();
@@ -82,6 +97,10 @@ public class JsonIO {
 		}
 	}
 	
+	/**
+	 * ArrayList-ből egy Object mátrixot készít a {@link me.aximcore.GameGui#table JTable}-nek.
+	 * @return Object Mátrix.
+	 */
 	public Object[][] getMap(){
 		Object[][] o = new Object[mapRows.size()][mapRows.size()];
 		int i = 0, ii = 0;
@@ -113,13 +132,21 @@ public class JsonIO {
 		return o;
 	}
 	
+	/**
+	 * {@link me.aximcore.GameGui#table JTable}-nek készít fejlécet.
+	 * @return string tömb ami mérete megegyezik a beolvasott sorok számával.
+	 */
 	public String[] getHeader(){
 		String [] header = new String[mapRows.size()];
 		
 		return header;
 	}
 	
+	/**
+	 * Konstruktor, json elérhetősége és olvasás.
+	 */
 	public JsonIO(){
+
 		this.setJsonPath("/map.json");
 		this.read();
 	}
