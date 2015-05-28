@@ -26,6 +26,7 @@ import javax.swing.border.BevelBorder;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.awt.FlowLayout;
 
 /**
  * Játék felület swingben.
@@ -169,20 +170,19 @@ public class GameGui {
 	 */
 	private void initialize() {
 		frmSokoban = new JFrame();
-		frmSokoban.setResizable(false);
+		frmSokoban.setResizable(true);
 		frmSokoban.setTitle("Sokoban");
-		frmSokoban.setBounds(100, 100, 1164, 852);
+		frmSokoban.setBounds(100, 100, 1280, 768);
 		frmSokoban.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JPanel panel = new JPanel();
 		frmSokoban.getContentPane().add(panel, BorderLayout.CENTER);
 
 		table = new JTable();
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		table.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setSelectionBackground(null);
-
-		table.setBounds(12, 12, 1129, 750);
 		fullTableRender(); // Adatmodel betöltése és tábla színei beállítása
 		
 		table.setRowHeight(75);
@@ -197,24 +197,19 @@ public class GameGui {
 		table.getColumnModel().getColumn(7).setMinWidth(75);
 		table.getColumnModel().getColumn(8).setMinWidth(75);
 		table.getColumnModel().getColumn(9).setMinWidth(75);
-
-		panel.setLayout(null);
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		panel.add(table);
 		
 		JLabel lblLepesekSzama = new JLabel("Lépések Száma:");
-		lblLepesekSzama.setBounds(12, 787, 126, 15);
 		panel.add(lblLepesekSzama);
 		
 		stepCount = new JLabel("0");
-		stepCount.setBounds(141, 787, 70, 15);
 		panel.add(stepCount);
 		
 		JLabel lblHelyreMozgatottElemek = new JLabel("Helyére mozgatott elemek száma:");
-		lblHelyreMozgatottElemek.setBounds(223, 787, 250, 15);
 		panel.add(lblHelyreMozgatottElemek);
 		
 		winCount = new JLabel("0");
-		winCount.setBounds(485, 787, 70, 15);
 		panel.add(winCount);
 		
 		logger.info("Gui init vége");
